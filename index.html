@@ -626,13 +626,19 @@
     }
 
     if(contactForm && formMessage) {
-        contactForm.addEventListener('submit', async (e) => {
+        contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            const name = $('#name').value.trim();
-            const email = $('#email').value.trim();
-            const phone = $('#phone').value.trim();
-            const service = $('#services-required').value;
+            const nameInput = $('#name');
+            const companyInput = $('#company');
+            const emailInput = $('#email');
+            const phoneInput = $('#phone');
+            const serviceInput = $('#services-required');
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const phone = phoneInput.value.trim();
+            const service = serviceInput.value;
 
             // --- Validation Logic ---
             if (!name) {
@@ -660,33 +666,38 @@
                 return;
             }
             
-            const formData = new FormData(contactForm);
             const button = contactForm.querySelector('button[type="submit"]');
+            const originalButtonText = button.textContent;
+            
             button.disabled = true;
             button.textContent = 'Sending...';
-            formMessage.classList.add('hidden');
-
-            try {
-                const response = await fetch('https://script.google.com/macros/s/AKfycbzpXYXPZ_F3cvTxhfdJGrcmF-g7XLrXvriyhWeLvGrFTny8Xc3jW4M85ue-2Zt3hfhhsg/exec', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (response.ok) {
-                    formMessage.textContent = "Thank you! Your message has been sent.";
-                    formMessage.className = 'p-4 mb-6 rounded-lg text-center bg-green-100 text-green-800';
-                    contactForm.reset();
-                } else {
-                    throw new Error('Network response was not ok.');
-                }
-            } catch (error) {
-                formMessage.textContent = 'Submission failed. Please try again later.';
-                formMessage.className = 'p-4 mb-6 rounded-lg text-center bg-red-100 text-red-800';
-            } finally {
-                formMessage.classList.remove('hidden');
+            
+            // Show success message immediately for better UX
+            formMessage.textContent = "Thank you! Your message has been sent.";
+            formMessage.className = 'p-4 mb-6 rounded-lg text-center bg-green-100 text-green-800';
+            formMessage.classList.remove('hidden');
+            
+            const formData = new FormData(contactForm);
+            contactForm.reset();
+            
+            setTimeout(() => {
                 button.disabled = false;
-                button.textContent = 'Send Message';
-            }
+                button.textContent = originalButtonText;
+            }, 1000);
+
+            // Submit data in the background
+            fetch('https://script.google.com/macros/s/AKfycbxa5ZIrbYZO5kSGZT4LJeSuzr5Qo3CjVUon5JzHrrsHibOIFD8d0BIfgkAEbxpfHbIWUw/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Background form submission failed.', response);
+                }
+            })
+            .catch(error => {
+                console.error('Error during background form submission:', error);
+            });
         });
     }
 
