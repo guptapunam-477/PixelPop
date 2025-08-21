@@ -1,0 +1,481 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <!-- The Content Security Policy is kept as-is, allowing connections to necessary services. -->
+ <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: blob: https://placehold.co; font-src 'self' data: https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' https://cdn.tailwindcss.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com; form-action 'self' https://script.google.com; frame-src 'self'; upgrade-insecure-requests">
+ <title>PixelPop Digital – Digital First Agency</title>
+ <meta name="description" content="Ship a stunning, high-converting site—fast. PixelPop designs & builds modern websites, apps, and growth engines with clean UI, tasteful motion, and measurable ROI.">
+ <meta name="keywords" content="web design, web development, mobile apps, performance marketing, SEO, UI/UX, PixelPop">
+ <meta name="author" content="PixelPop Digital">
+ <link rel="canonical" href="https://pixelpop.example">
+ <!-- Open Graph and Twitter Card metadata for social sharing. -->
+ <meta property="og:title" content="PixelPop Digital – Digital-First Web Design & Growth">
+ <meta property="og:description" content="Websites, web apps, mobile apps, and performance marketing focused on conversion and ROI.">
+ <meta property="og:image" content="https://placehold.co/1200x630/0b1220/ffffff?text=PixelPop+Digital">
+ <meta property="og:url" content="https://pixelpop.example">
+ <meta property="og:type" content="website">
+ <meta property="og:locale" content="en_IN">
+ <meta name="twitter:card" content="summary_large_image">
+ <meta name="twitter:title" content="PixelPop Digital – Digital First Agency">
+ <meta name="twitter:description" content="Modern sites, apps & growth engines with tasteful motion and measurable ROI.">
+ <meta name="twitter:image" content="https://placehold.co/1200x630/0b1220/ffffff?text=PixelPop+Digital">
+ <!-- Favicons and PWA manifest details. -->
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+ <link rel="apple-touch-icon" href="https://placehold.co/180x180/0b1220/ffffff?text=PP">
+ <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22PixelPop Digital%22,%22short_name%22:%22PixelPop%22,%22start_url%22:%22/%22,%22display%22:%22standalone%22,%22background_color%22:%22#0b1220%22,%22theme_color%22:%22#0b1220%22,%22icons%22:[{%22src%22:%22https://placehold.co/192x192/0b1220/ffffff?text=PP%22,%22sizes%22:%22192x192%22,%22type%22:%22image/png%22},{%22src%22:%22https://placehold.co/512x512/0b1220/ffffff?text=PP%22,%22sizes%22:%22512x512%22,%22type%22:%22image/png%22}]}"/>
+ <meta name="theme-color" content="#0b1220">
+ <link rel="preload" as="image" href="https://placehold.co/1920x1080/0d1321/1e40af.svg?text=%2F%2F">
+ <!-- Tailwind CSS and Google Fonts. -->
+ <script src="https://cdn.tailwindcss.com"></script>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+ <!-- Schema.org structured data for SEO. -->
+ <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"PixelPop Digital","url":"https://pixelpop.example","logo":"https://pixelpop.example/assets/logo.svg","sameAs":["https://www.linkedin.com/company/pixelpop-digital","https://www.instagram.com/pixelpop.digital"]}</script>
+ <style>
+   body{font-family:'Inter',ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica Neue,Arial,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';background-color:#0b1220;color:#0b1220}
+   /* Styles for the case study overlay transition. */
+   .case-study-overlay{opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity .3s ease,transform .3s ease}
+   .case-study-overlay.active{opacity:1;transform:translateY(0);pointer-events:auto}
+   /* Prevents body scroll when the overlay is active. */
+   body.no-scroll{overflow:hidden}
+ </style>
+</head>
+<body class="bg-[#0b1220]">
+ <!-- ===== Navbar ===== -->
+ <header class='fixed top-0 w-full z-50 bg-transparent backdrop-blur-md border-b border-white/10 flex justify-between items-center px-6 py-4 transition-all duration-300'>
+   <div class='flex items-center gap-3'>
+     <a href="/" class="flex items-center gap-3">
+       <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 14H3C2.44772 14 2 13.5523 2 13V5C2 4.44772 2.44772 4 3 4H21C21.5523 4 22 4.44772 22 5V13C22 13.5523 21.5523 14 21 14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 8H6.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 8H9.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 20L17 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 14V20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+       <span class='text-white text-2xl font-bold'>PixelPop</span>
+       <!-- Tiny website preview icon next to the brand name. -->
+       <span aria-hidden="true" class="hidden sm:inline-block ml-2 w-16 h-10 rounded-lg border border-white/20 bg-white/10 relative overflow-hidden"><span class="absolute top-1 left-1 flex gap-1"><span class="w-2 h-2 bg-red-400 rounded-full"></span><span class="w-2 h-2 bg-yellow-300 rounded-full"></span><span class="w-2 h-2 bg-green-400 rounded-full"></span></span><span class="absolute inset-x-2 bottom-2 h-2 bg-white/30 rounded"></span></span>
+     </a>
+   </div>
+   <nav class='hidden md:flex gap-8 text-white text-lg'>
+     <a href='#services' class='hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-white/80 rounded'>Services</a>
+     <a href='#work' class='hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-white/80 rounded'>Work</a>
+     <a href='#contact' class='hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-white/80 rounded'>Contact</a>
+     <a href='#faq' class='hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-white/80 rounded'>FAQ</a>
+   </nav>
+   <div class='hidden md:flex'>
+     <!-- Short CTA text "Book Call" as requested. -->
+     <a href='https://calendly.com/pixel-pop-digital' target="_blank" rel="noopener noreferrer" class='bg-gradient-to-r from-[#22c55e] to-[#3b82f6] text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-lg hover:scale-[1.03] transition-transform'>Book Call</a>
+   </div>
+   <button id='menu-btn' class='md:hidden text-white p-1 rounded focus:outline-none focus:ring-2 focus:ring-white/70' aria-label='Open navigation menu' aria-expanded='false' aria-controls='mobile-menu'>
+     <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' class='w-8 h-8'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h16' /></svg>
+   </button>
+   <!-- Mobile navigation menu. -->
+   <div id='mobile-menu' class='hidden absolute top-full inset-x-0 bg-[#0b1220]/95 text-white text-lg flex flex-col space-y-6 py-6 px-6 md:hidden' role='dialog' aria-modal='true'>
+     <a href='#services' class='hover:text-blue-300 mobile-menu-link'>Services</a>
+     <a href='#work' class='hover:text-blue-300 mobile-menu-link'>Work</a>
+     <a href='#contact' class='hover:text-blue-300 mobile-menu-link'>Contact</a>
+     <a href='#faq' class='hover:text-blue-300 mobile-menu-link'>FAQ</a>
+     <a href='https://calendly.com/pixel-pop-digital' target="_blank" rel="noopener noreferrer" class='bg-gradient-to-r from-[#22c55e] to-[#3b82f6] text-white px-4 py-2 rounded-lg font-semibold shadow-lg mobile-menu-link'>Book Call</a>
+   </div>
+ </header>
+
+
+ <main>
+   <!-- ===== Hero Section ===== -->
+   <section class='relative min-h-[92vh] flex flex-col justify-center items-center text-center text-white bg-cover bg-center px-6' style="background-image: url('https://placehold.co/1920x1080/0d1321/1e40af.svg?text=%2F%2F');">
+     <div class="absolute inset-0 bg-black/60"></div>
+     <div class='relative z-10' data-reveal>
+       <!-- Header copy without dashes. -->
+       <h1 class='text-4xl md:text-6xl font-extrabold mb-4'>Digital First Agency</h1>
+       <p class='text-lg md:text-2xl max-w-3xl text-white/90'>Ship a stunning, high-converting site—fast. PixelPop designs and builds modern websites, apps, and growth engines with clean UI, tasteful motion, and measurable ROI.</p>
+       <div class='mt-8 flex flex-col md:flex-row gap-4 justify-center'>
+         <a href='https://calendly.com/pixel-pop-digital' target="_blank" rel="noopener noreferrer" class='bg-gradient-to-r from-[#22c55e] to-[#3b82f6] text-white px-6 py-3 rounded-xl text-lg font-bold shadow-lg hover:scale-105 transition-transform'>Book Call</a>
+         <a href='#services' class='bg-white text-[#0b1220] px-6 py-3 rounded-xl text-lg font-semibold shadow-lg hover:scale-105 transition-transform'>See Services</a>
+       </div>
+       <ul class='mt-8 text-sm md:text-base text-gray-200 flex flex-wrap justify-center gap-x-6 gap-y-2 list-none'>
+         <li>✓ Fast turnarounds</li>
+         <li>✓ Conversion-first UX</li>
+         <li>✓ Production-grade code</li>
+         <li>✓ SEO & performance baked in</li>
+       </ul>
+     </div>
+   </section>
+
+
+   <!-- ===== AI Problem Analyzer Section ===== -->
+   <section id='analyzer' class='bg-white text-[#0b1220] px-6 py-16 md:py-24'>
+     <div class="max-w-3xl mx-auto" data-reveal>
+       <h2 class='text-4xl md:text-5xl font-bold text-center mb-4'>Discover Your Solution</h2>
+       <p class='text-center text-lg max-w-2xl mx-auto mb-8'>Describe your business challenge, and our AI will suggest the best services to help you succeed.</p>
+       <form id='ai-form' class='max-w-2xl mx-auto grid grid-cols-1 gap-4' novalidate>
+         <label for='ai-problem' class='sr-only'>Describe your problem</label>
+         <textarea id='ai-problem' name='problem' rows='4' maxlength='1000' required placeholder="e.g., 'My ROAS is low and I need a better digital marketing strategy.'" class='p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500' aria-describedby='ai-help'></textarea>
+         <p id='ai-help' class='text-sm text-gray-600'>Avoid sharing sensitive personal data. Max 1000 characters.</p>
+         <div class='flex items-center gap-3'>
+           <button id='ai-submit' type='button' class='bg-[#0b1220] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#131b2c] transition-colors disabled:bg-gray-400'>Analyze My Problem</button>
+           <span id='ai-status' class='text-sm text-gray-600' aria-live='polite'></span>
+         </div>
+         <!-- Honeypot field for spam prevention -->
+         <input type='text' name='website' id='hp-ai' class='hidden' tabindex='-1' autocomplete='off' aria-hidden='true' />
+       </form>
+       <!-- This container will be populated with the AI analysis results. -->
+       <div id='ai-result' class='mt-8 hidden p-6 bg-gray-50 rounded-lg border'>
+         <h3 class='text-2xl font-semibold mb-3'>Recommended Services</h3>
+         <div id='ai-services' class='flex flex-wrap gap-2'></div>
+         <h4 class='mt-5 font-semibold'>Analysis</h4>
+         <p id='ai-reason' class='mt-2 text-gray-800'></p>
+         <h4 class='mt-5 font-semibold'>Next Steps</h4>
+         <ol id='ai-next-steps' class='mt-2 list-decimal list-inside text-gray-800 space-y-1'></ol>
+         <a href='#contact' class='inline-block mt-6 bg-gradient-to-r from-[#22c55e] to-[#3b82f6] text-white px-6 py-3 rounded-lg font-semibold shadow hover:scale-[1.02] transition-transform'>Book Free Strategy Call</a>
+       </div>
+     </div>
+   </section>
+
+
+   <!-- ===== Core Services Section ===== -->
+   <section id='services' class='bg-[#eef4ff] text-[#0b1220] px-6 py-16 md:py-24'>
+     <div class="max-w-7xl mx-auto">
+       <div class='text-center' data-reveal>
+         <h2 class='text-4xl md:text-5xl font-bold mb-4'>Our Core Services</h2>
+         <p class='text-lg text-center max-w-2xl mx-auto mb-12'>Everything you need to build, launch, and grow your digital presence.</p>
+       </div>
+       <!-- Services grid with proper alignment ensured by `items-stretch`. -->
+       <div class='grid md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch'>
+         <article class='p-6 bg-white rounded-xl shadow flex flex-col justify-between h-full min-h-[220px]' data-reveal><h3 class='text-2xl font-semibold mb-2'>Website Design</h3><p>Conversion-focused UI with brand systems and component libraries.</p></article>
+         <article class='p-6 bg-white rounded-xl shadow flex flex-col justify-between h-full min-h-[220px]' data-reveal><h3 class='text-2xl font-semibold mb-2'>Website & Web App Development</h3><p>Modern stacks, clean code, and performance budgets.</p></article>
+         <article class='p-6 bg-white rounded-xl shadow flex flex-col justify-between h-full min-h-[220px]' data-reveal><h3 class='text-2xl font-semibold mb-2'>Mobile App Development</h3><p>Cross-platform apps with native-feel performance.</p></article>
+         <article class='p-6 bg-white rounded-xl shadow flex flex-col justify-between h-full min-h-[220px]' data-reveal><h3 class='text-2xl font-semibold mb-2'>Digital & Performance Marketing</h3><p>Acquisition engines tuned to ROAS and growth.</p></article>
+       </div>
+     </div>
+   </section>
+
+
+   <!-- ===== How We Work Section ===== -->
+   <section id='how-we-work' class='bg-gradient-to-br from-blue-950 to-blue-800 text-white px-6 py-20'>
+     <div class="max-w-7xl mx-auto" data-reveal>
+       <h2 class='text-4xl md:text-5xl font-bold text-center mb-10'>How We Work</h2>
+       <div class='grid md:grid-cols-4 gap-8 text-left text-gray-100'>
+         <div><h3 class='text-xl font-semibold mb-2'>1. Discovery & Strategy</h3><p>We dive deep into your goals to create a roadmap for success.</p></div>
+         <div><h3 class='text-xl font-semibold mb-2'>2. Design & Prototype</h3><p>User-centric designs and interactive prototypes for feedback.</p></div>
+         <div><h3 class='text-xl font-semibold mb-2'>3. Build & Test</h3><p>Clean code with rigorous QA and performance budgets.</p></div>
+         <div><h3 class='text-xl font-semibold mb-2'>4. Launch & Iterate</h3><p>We launch and partner for ongoing growth.</p></div>
+       </div>
+     </div>
+   </section>
+
+
+   <!-- ===== Case Studies Section ===== -->
+   <section id='work' class='bg-white text-[#0b1220] px-6 py-16 md:py-24'>
+     <div class="max-w-6xl mx-auto">
+       <h2 class='text-4xl md:text-5xl text-center font-bold mb-12' data-reveal>Case Studies</h2>
+       <div class='grid md:grid-cols-2 gap-12'>
+         <!-- Case Study 1: Hicom India -->
+         <article class='shadow-lg rounded-xl overflow-hidden transition transform hover:scale-[1.02] flex flex-col' data-reveal>
+           <img src='https://placehold.co/600x400/e0e7ff/3730a3?text=Hicom+India' alt='Hicom India website screenshot' class='w-full h-64 object-cover' loading='lazy'>
+           <div class='p-6 flex flex-col flex-grow'>
+             <h3 class='text-xl font-semibold mb-2'>Hicom India: Organic Traffic & Lead Engine Overhaul</h3>
+             <!-- Wins/results are neatly presented. -->
+             <div class="my-4 space-y-2">
+               <p class="flex items-center text-sm font-semibold text-green-700"><svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>+148% Organic Sessions</p>
+               <p class="flex items-center text-sm font-semibold text-green-700"><svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>+92% Leads QoQ</p>
+               <p class="flex items-center text-sm font-semibold text-green-700"><svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>↑ 11.3 Avg. Position Improvement</p>
+             </div>
+             <a href='#case/hicom-india' data-case-id='hicom-india' class='cs-link text-blue-600 hover:underline font-semibold mt-auto inline-block'>Read Case Study →</a>
+           </div>
+         </article>
+         <!-- Case Study 2: TheBTclub -->
+         <article class='shadow-lg rounded-xl overflow-hidden transition transform hover:scale-[1.02] flex flex-col' data-reveal>
+           <img src='https://placehold.co/600x400/dbeafe/1e3a8a?text=TheBTclub' alt='TheBTclub website screenshot' class='w-full h-64 object-cover' loading='lazy'>
+           <div class='p-6 flex flex-col flex-grow'>
+             <h3 class='text-xl font-semibold mb-2'>TheBTclub: Scaling Performance Marketing to Profitability</h3>
+             <div class="my-4 space-y-2">
+               <p class="flex items-center text-sm font-semibold text-green-700"><svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>3x Sales within 6 months</p>
+               <p class="flex items-center text-sm font-semibold text-green-700"><svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>4x ROAS</p>
+               <p class="flex items-center text-sm font-semibold text-green-700"><svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>5% Reduction in RTOs</p>
+             </div>
+             <a href='#case/thebtclub' data-case-id='thebtclub' class='cs-link text-blue-600 hover:underline font-semibold mt-auto inline-block'>Read Case Study →</a>
+           </div>
+         </article>
+       </div>
+       <!-- Case Study Overlay Panel -->
+       <div id='cs-panel' class='case-study-overlay fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4'>
+         <article class='w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl p-6 md:p-10 relative'>
+           <!-- Close button positioned top-left as requested. -->
+           <button id='cs-close' class='absolute top-4 left-4 text-[#0b1220] bg-gray-100 hover:bg-gray-200 rounded-full p-2' aria-label='Close case study'>
+             <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z' clip-rule='evenodd'/></svg>
+           </button>
+           <div id='cs-content'></div>
+         </article>
+       </div>
+     </div>
+   </section>
+
+
+   <!-- ===== FAQ Section ===== -->
+   <section id='faq' class='bg-[#0b1220] text-white px-6 py-16 md:py-24'>
+     <div class="max-w-3xl mx-auto" data-reveal>
+       <h2 class='text-4xl md:text-5xl font-bold text-center mb-8'>Your Questions, Answered</h2>
+       <div class='space-y-4'>
+         <details class='p-4 bg-white/5 rounded-lg group'>
+           <summary class='text-xl font-semibold cursor-pointer list-none flex justify-between items-center'>How much does a project typically cost?<span class="transition-transform transform group-open:rotate-45">+</span></summary>
+           <p class='text-white/80 mt-2'>Every project is unique. We provide customized quotes based on scope, features, and timeline. Contact us to get an estimate tailored to your needs.</p>
+         </details>
+         <details class='p-4 bg-white/5 rounded-lg group'>
+           <summary class='text-xl font-semibold cursor-pointer list-none flex justify-between items-center'>What's included in a standard website package?<span class="transition-transform transform group-open:rotate-45">+</span></summary>
+           <p class='text-white/80 mt-2'>Discovery, design, development, basic SEO setup, and launch support. We also provide training to manage your site.</p>
+         </details>
+         <details class='p-4 bg-white/5 rounded-lg group'>
+           <summary class='text-xl font-semibold cursor-pointer list-none flex justify-between items-center'>How can you help increase my ROAS?<span class="transition-transform transform group-open:rotate-45">+</span></summary>
+           <p class='text-white/80 mt-2'>We audit your ad funnels, improve landing pages, and implement A/B tests and creative testing to boost ROAS.</p>
+         </details>
+       </div>
+     </div>
+   </section>
+
+
+   <!-- ===== Contact Section ===== -->
+   <section id='contact' class='bg-blue-900 text-white px-6 py-20'>
+     <div class="max-w-xl mx-auto" data-reveal>
+       <h2 class='text-4xl md:text-5xl font-bold text-center mb-6'>Get in Touch</h2>
+       <p class='text-center max-w-xl mx-auto text-white/80 mb-10'>Have a project in mind? Fill out the form below and we’ll get back to you within 24 hours.</p>
+       <div id="form-message" class="hidden p-4 mb-6 rounded-lg text-center"></div>
+       <!-- Form posts to the specified Google Apps Script URL. -->
+       <form id='pixelpop-form' class='max-w-xl mx-auto grid grid-cols-1 gap-6 bg-white text-[#0b1220] p-6 rounded-lg shadow-lg' method='POST' action='https://script.google.com/macros/s/AKfycbzpXYXPZ_F3cvTxhfdJGrcmF-g7XLrXvriyhWeLvGrFTny8Xc3jW4M85ue-2Zt3hfhhsg/exec' novalidate>
+         <div><label for='name' class='text-sm font-semibold mb-1 sr-only'>Your Name</label><input id='name' name='Name' type='text' placeholder='Your Name' required class='p-3 w-full rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'></div>
+         <div><label for='company' class='text-sm font-semibold mb-1 sr-only'>Company Name</label><input id='company' name='Company Name' type='text' placeholder='Company Name' class='p-3 w-full rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'></div>
+         <div><label for='email' class='text-sm font-semibold mb-1 sr-only'>Email</label><input id='email' type='email' name='Email' placeholder='Email' required class='p-3 w-full rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500' autocomplete='email'></div>
+         <div><label for='phone' class='text-sm font-semibold mb-1 sr-only'>Phone Number</label><input id='phone' type='tel' name='Phone Number' placeholder='Phone Number' class='p-3 w-full rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500' autocomplete='tel'></div>
+         <div><label for='services-required' class='text-sm font-semibold mb-1 sr-only'>Required Services</label><select id='services-required' name='Services Required' class='p-3 w-full rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'><option value="" disabled selected>Select a service...</option><option value='Website Design'>Website Design</option><option value='Website & Web App Development'>Website & Web App Development</option><option value='Mobile App Development'>Mobile App Development</option><option value='Digital & Performance Marketing'>Digital & Performance Marketing</option></select></div>
+         <!-- Honeypot field for spam prevention -->
+         <input type='text' name='website' id='hp-contact' class='hidden' tabindex='-1' autocomplete='off' aria-hidden='true' />
+         <button type='submit' id="submit-button" class='bg-gradient-to-r from-[#22c55e] to-[#3b82f6] text-white px-6 py-3 rounded-xl font-semibold hover:scale-105 transition-transform disabled:bg-gray-400'>Send Message</button>
+       </form>
+     </div>
+   </section>
+ </main>
+
+
+ <!-- ===== Footer ===== -->
+ <footer class='bg-[#0d1321] text-white px-6 py-8 text-center'>
+   <p class='text-sm mb-2 text-gray-400'>Phone: <a href='tel:+917007705861' class='text-blue-300 hover:underline'>+91 7007705861</a> · Email: <a href='mailto:works.prabhakar@gmail.com' class='text-blue-300 hover:underline'>works.prabhakar@gmail.com</a> · <a href='https://calendly.com/pixel-pop-digital' class='text-blue-300 hover:underline'>Book Call</a></p>
+   <p class='text-sm text-gray-500'>&copy; 2025 PixelPop Digital. All rights reserved.</p>
+   <nav class='mt-2 flex justify-center gap-4 text-blue-300'>
+     <a href='#' class='hover:underline'>Privacy</a>
+     <a href='https://www.linkedin.com/company/pixelpop-digital' target='_blank' rel='noopener noreferrer' class='hover:underline'>LinkedIn</a>
+     <a href='https://www.instagram.com/pixelpop.digital' target='_blank' rel='noopener noreferrer' class='hover:underline'>Instagram</a>
+   </nav>
+ </footer>
+
+
+ <script>
+ document.addEventListener('DOMContentLoaded', () => {
+   // Helper functions for DOM manipulation.
+   const $ = (s, r=document) => r.querySelector(s);
+   const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+   const escapeHTML = (str='') => str.replace(/[&<>\"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;','\'':'&#39;'}[c]));
+
+
+   // --- Mobile Menu Logic ---
+   const menuBtn=$('#menu-btn'); const mobileMenu=$('#mobile-menu');
+   if(menuBtn && mobileMenu){
+     const toggle=()=>{ const open=mobileMenu.classList.toggle('hidden'); menuBtn.setAttribute('aria-expanded', String(!open)); };
+     menuBtn.addEventListener('click', toggle);
+     $$('.mobile-menu-link', mobileMenu).forEach(l=>l.addEventListener('click', toggle));
+   }
+
+
+   // --- Reveal on Scroll Animation ---
+   const revealTargets=$$('[data-reveal]');
+   if('IntersectionObserver' in window && revealTargets.length){
+     const io=new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; io.unobserve(e.target); } }); }, {threshold:0.15});
+     revealTargets.forEach(el=>{ el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity .7s ease-out, transform .7s ease-out'; io.observe(el); });
+   }
+
+
+   // --- Contact Form Submission Logic ---
+   const contactForm=$('#pixelpop-form'); const formMessage=$('#form-message');
+   if(contactForm && formMessage){
+     contactForm.addEventListener('submit', async (e)=>{
+       e.preventDefault();
+       const hp=$('#hp-contact'); if(hp && hp.value) return; // Honeypot check
+       const fd=new FormData(contactForm);
+       const ts=new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'});
+       fd.append('Timestamp', ts);
+       for(const [k,v] of fd.entries()){ if(typeof v==='string') fd.set(k, v.trim()); }
+       const btn=contactForm.querySelector('button[type="submit"]'); if(btn){ btn.disabled=true; btn.textContent='Sending...'; }
+       try{
+         // Using fetch to post to the Google Apps Script URL.
+         const res=await fetch(contactForm.action,{method:'POST', body:fd, mode:'cors'});
+         if(!res.ok) throw new Error('Bad response');
+         // Displaying a polite thank-you message on success.
+         formMessage.textContent='Thank you! Your message has been sent. We\'ll get back to you shortly.';
+         formMessage.className='p-4 mb-6 rounded-lg text-center bg-green-100 text-green-800';
+         contactForm.reset();
+       }catch(err){
+         formMessage.textContent='Submission failed. Please try again later.';
+         formMessage.className='p-4 mb-6 rounded-lg text-center bg-red-100 text-red-800';
+       }finally{
+         formMessage.classList.remove('hidden'); if(btn){ btn.disabled=false; btn.textContent='Send Message'; }
+       }
+     });
+   }
+
+
+   // --- AI Analyzer Logic ---
+   const aiForm=$('#ai-form'); const aiBtn=$('#ai-submit'); const aiTA=$('#ai-problem');
+   const aiStatus=$('#ai-status'); const aiOut=$('#ai-result');
+   const aiChips=$('#ai-services'); const aiReason=$('#ai-reason'); const aiSteps=$('#ai-next-steps');
+   const hpAI=$('#hp-ai'); let lastAISubmit=0;
+
+
+   // Fallback function if the backend API fails.
+   function localSuggest(text){
+     const t=(text||'').toLowerCase(); const buckets=new Set();
+     const rules=[
+       {m:['roas','ads','cpc','cac','retarget','facebook','google ads','meta ads'], r:['perf_marketing']},
+       {m:['slow','lcp','cls','web vitals','core web','performance','speed'], r:['web_dev']},
+       {m:['app','android','ios','play store','app store'], r:['mobile_app']},
+       {m:['brand','ui','ux','landing','redesign','conversion','cvr'], r:['website_design']},
+       {m:['seo','organic','sitemap','crawl','index','schema'], r:['web_dev','perf_marketing']}
+     ];
+     rules.forEach(rule=>{ if(rule.m.some(k=>t.includes(k))) rule.r.forEach(x=>buckets.add(x)); });
+     if(!buckets.size) buckets.add('website_design');
+     const map={website_design:'Website Design', web_dev:'Website & Web App Development', mobile_app:'Mobile App Development', perf_marketing:'Digital & Performance Marketing'};
+     const services=[...buckets].map(id=>({id,label:map[id]}));
+     return { services, reason:'Suggested by heuristic analyzer based on the keywords we detected in your prompt.', steps:['Clarify target audience and primary conversion goal.','Book a free strategy call to validate success metrics.','Run discovery to scope deliverables and timeline.'] };
+   }
+
+
+   // Function to call the secure backend API endpoint.
+   async function callBackend(text){
+     try{
+       const res=await fetch('/api/analyze',{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ prompt:text })});
+       if(!res.ok) throw new Error('Bad response');
+       const data=await res.json();
+       if(data && Array.isArray(data.services) && data.services.length) return data;
+       return localSuggest(text); // Fallback if response is malformed.
+     }catch(e){ return localSuggest(text); } // Fallback on network error.
+   }
+
+
+   // Main function to run the analyzer.
+   async function runAnalyzer(){
+     if(hpAI && hpAI.value) return; // Honeypot check
+     const now=Date.now(); if(now-lastAISubmit<2000){ aiStatus.textContent='Please wait a moment...'; return; }
+     lastAISubmit=now; const text=(aiTA.value||'').slice(0,1000).trim();
+     if(!text){ aiTA.focus(); aiStatus.textContent='Please describe your challenge.'; aiOut.classList.add('hidden'); return; }
+     aiBtn.disabled=true; aiBtn.textContent='Analyzing…'; aiStatus.textContent='Analyzing…';
+     const result=await callBackend(text);
+     // Render the results: service chips, analysis, and next steps.
+     aiChips.innerHTML=''; (result.services||[]).forEach(s=>{ const span=document.createElement('span'); span.className='inline-block bg-[#eef4ff] text-[#0b1220] border border-blue-200 px-3 py-1 rounded-full text-sm font-medium'; span.textContent=s.label; aiChips.appendChild(span); });
+     aiReason.textContent=result.reason || 'Based on your input, these services fit best.';
+     aiSteps.innerHTML=''; (result.steps||[]).forEach(step=>{ const li=document.createElement('li'); li.textContent=step; aiSteps.appendChild(li); });
+     aiOut.classList.remove('hidden'); aiStatus.textContent='Ready'; aiBtn.disabled=false; aiBtn.textContent='Analyze My Problem';
+   }
+
+
+   if(aiBtn) aiBtn.addEventListener('click', runAnalyzer);
+   if(aiForm) aiForm.addEventListener('submit', (e)=>{ e.preventDefault(); runAnalyzer(); });
+
+
+   // --- Case Study Overlay Logic ---
+   const csPanel=$('#cs-panel'); const csClose=$('#cs-close'); const csContent=$('#cs-content'); const links=$$('.cs-link');
+
+
+   // Database for case study content.
+   const CS_DB={
+     'hicom-india': {
+       title: 'Case Study\nHicom India: Organic Traffic & Lead Engine Overhaul',
+       metrics: ['+148%','Organic Sessions in 6 months','+92%','Qualified Leads QoQ','↑ 11.3','Avg. Position Improvement'],
+       challenge: "Hicom India, a leading industrial supplier, had a technically sound website but struggled with stagnant organic traffic and a low volume of qualified leads. Their digital presence wasn't reflecting their market leadership.",
+       approachIntro: 'PixelPop conducted a full-funnel audit, identifying key opportunities in technical SEO, content architecture, and lead capture mechanisms. Our strategy was built on three pillars:',
+       approach: [
+         'IA Restructuring & Technical SEO: We overhauled the site structure for better crawlability, fixed Core Web Vitals issues, and cleaned up sitemap and redirect hygiene.',
+         'Content & Authority Building: We developed topic clusters around their core services, creating content pillars that established authority and targeted high-intent keywords.',
+         'Lead Flow Revamp: We redesigned key landing pages, optimized forms, and implemented clear CTAs with proper analytics event tracking to measure success.'
+       ],
+       resultsBullets: [
+         'Significant, measurable growth within two quarters.',
+         'Foundational SEO and UX improvements delivered compounding gains.',
+         'The website now acts as a self-sustaining lead generation engine.'
+       ]
+     },
+     'thebtclub': {
+       title: 'Case Study\nTheBTclub: Scaling Performance Marketing to Profitability',
+       metrics: ['3x','Sales within 6 months','4x','Return on Ad Spend (ROAS)','5%','Reduction in RTOs'],
+       challenge: 'TheBTclub, a fast-growing D2C apparel brand, faced scaling challenges with their paid media. Rising customer acquisition costs and a high RTO rate were eroding profitability, despite strong product demand.',
+       approachIntro: 'PixelPop implemented a sprint-based approach focused on rapid testing and optimization across the entire marketing funnel. The strategy included:',
+       approach: [
+         'Account Restructuring: We rebuilt their Meta and Google ad accounts with a tiered campaign structure to separate testing, scaling, and retargeting efforts.',
+         'Creative Testing Flywheel: We established a high-tempo creative testing process to combat ad fatigue and identify winning angles quickly.',
+         'Offer & Funnel Optimization: We analyzed post-purchase data to craft new bundle offers and optimized the checkout flow to simultaneously increase AOV and reduce RTO.'
+       ],
+       resultsBullets: [
+         'Marked efficiency and profitability gains within eight weeks.',
+         'Clear path to scale spend while maintaining a healthy blended ROAS.',
+         'Lower return rates and higher average order value.'
+       ]
+     }
+   };
+
+
+   // Helper function to create the metrics grid.
+   function metricGrid(arr){
+     const pairs=[]; for(let i=0;i<arr.length;i+=2){ pairs.push([arr[i], arr[i+1]]); }
+     return '<div class="grid sm:grid-cols-3 gap-4 my-6">'+pairs.map(([big,small])=>`<div class="bg-green-50 text-green-800 p-4 rounded-lg text-center"><p class="text-3xl font-extrabold">${escapeHTML(big||'')}</p><p class="text-sm">${escapeHTML(small||'')}</p></div>`).join('')+'</div>';
+   }
+   // Helper function to create visually neat bulleted lists.
+   function bulletList(items){ return '<ul class="space-y-2">'+items.map(t=>`<li class="flex items-start gap-3"><svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 mt-1 text-blue-600 flex-shrink-0' viewBox='0 0 20 20' fill='currentColor'><path fill-rule='evenodd' d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z' clip-rule='evenodd'/></svg><span>${escapeHTML(t)}</span></li>`).join('')+'</ul>'; }
+
+
+   // Function to open and populate the case study overlay.
+   function openCaseStudy(id){
+     const data=CS_DB[id]; if(!data||!csPanel||!csContent) return;
+     const html = `
+       <h1 class='text-3xl md:text-4xl font-extrabold whitespace-pre-line'>${escapeHTML(data.title)}</h1>
+       ${metricGrid(data.metrics)}
+       <section class='mb-6'>
+         <h2 class='text-2xl font-bold mb-2'>The Challenge</h2>
+         <p class='text-gray-700'>${escapeHTML(data.challenge)}</p>
+       </section>
+       <section class='mb-6'>
+         <h2 class='text-2xl font-bold mb-2'>Our Approach</h2>
+         <p class='text-gray-700 mb-3'>${escapeHTML(data.approachIntro)}</p>
+         ${bulletList(data.approach)}
+       </section>
+       <section class='mb-6'>
+         <h2 class='text-2xl font-bold mb-2'>The Results</h2>
+         <!-- Using bulletList for the results/wins as requested. -->
+         ${bulletList(data.resultsBullets)}
+       </section>
+       <div class='mt-8'>
+         <a href='#contact' class='inline-block bg-gradient-to-r from-[#22c55e] to-[#3b82f6] text-white px-6 py-3 rounded-lg font-semibold shadow hover:scale-[1.02] transition-transform'>Start a Similar Project</a>
+       </div>`;
+     csContent.innerHTML = html;
+     csPanel.classList.add('active');
+     document.body.classList.add('no-scroll');
+     // Update browser history to simulate a page change.
+     history.pushState({cs:id}, '', `#case/${id}`);
+     setTimeout(()=>{ const close=$('#cs-close'); if(close) close.focus(); }, 0); // For accessibility.
+   }
+
+
+   // Function to close the case study overlay.
+   function closeCaseStudy(){
+     csPanel.classList.remove('active');
+     document.body.classList.remove('no-scroll');
+     // Restore history state on close.
+     if(location.hash.startsWith('#case/')) history.pushState({}, '', '#work');
+   }
+
+
+   // Event listeners for opening and closing the overlay.
+   links.forEach(a=>a.addEventListener('click', (e)=>{ e.preventDefault(); const id=a.getAttribute('data-case-id'); openCaseStudy(id); }));
+   if(csClose) csClose.addEventListener('click', closeCaseStudy);
+   if(csPanel) csPanel.addEventListener('click', (e)=>{ if(e.target===csPanel) closeCaseStudy(); }); // Close on background click.
+   window.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && csPanel.classList.contains('active')) closeCaseStudy(); }); // Close with Escape key.
+   window.addEventListener('popstate', ()=>{ if(location.hash.startsWith('#case/')){ const id=location.hash.split('/')[1]; openCaseStudy(id); } else { if(csPanel.classList.contains('active')) closeCaseStudy(); } });
+   // Open directly if hash is present on page load.
+   if(location.hash.startsWith('#case/')){ const id=location.hash.split('/')[1]; openCaseStudy(id); }
+ });
+ </script>
+</body>
+</html>
