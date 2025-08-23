@@ -110,7 +110,8 @@
    </section>
 
    <!-- ===== AI Problem Analyzer Section ===== -->
-   <section id='analyzer' class='bg-white text-[#0b1220] px-6 md:px-10 lg:px-16 py-16 md:py-24'>
+   <!-- Light background to match modern design aesthetics -->
+   <section id='analyzer' class='bg-[#f8fafc] text-[#0b1220] px-6 md:px-10 lg:px-16 py-16 md:py-24'>
      <div class="max-w-3xl mx-auto" data-reveal>
        <h2 class='text-4xl md:text-5xl font-bold text-center mb-4'>Discover Your Solution</h2>
        <p class='text-center text-lg max-w-2xl mx-auto mb-8'>Describe your business challenge, and our AI will suggest the best services to help you succeed.</p>
@@ -119,7 +120,11 @@
          <textarea id='ai-problem' name='problem' rows='4' maxlength='1000' required placeholder="e.g., 'My ROAS is low and I need a better digital marketing strategy.'" class='p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5A99FC]' aria-describedby='ai-help'></textarea>
          <p id='ai-help' class='text-sm text-gray-600'>Avoid sharing sensitive personal data. Max 1000 characters.</p>
          <div class='flex items-center gap-3'>
+           <!-- Submit button for triggering the analyzer -->
            <button id='ai-submit' type='button' class='bg-[#0b1220] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#131b2c] transition-colors disabled:bg-gray-400'>Analyze My Problem</button>
+           <!-- Animated spinner shown during analysis -->
+           <span id='ai-loader' class='hidden w-5 h-5 border-4 border-[#5A99FC] border-t-transparent rounded-full animate-spin' aria-hidden='true'></span>
+           <!-- Status text updated via JavaScript -->
            <span id='ai-status' class='text-sm text-gray-600' aria-live='polite'></span>
          </div>
        </form>
@@ -137,7 +142,8 @@
    </section>
 
    <!-- ===== Services Section ===== -->
-   <section id='services' class='bg-[#eef4ff] text-[#0b1220] px-6 md:px-10 lg:px-16 py-16 md:py-24'>
+   <!-- Soft blue background reminiscent of RadicalLabs for improved UX -->
+   <section id='services' class='bg-[#f7faff] text-[#0b1220] px-6 md:px-10 lg:px-16 py-16 md:py-24'>
      <div class="max-w-7xl mx-auto">
        <div class='text-center' data-reveal>
          <h2 class='text-4xl md:text-5xl font-bold mb-4'>Services</h2>
@@ -188,7 +194,7 @@
    </section>
 
    <!-- ===== Case Studies Section ===== -->
-    <section id='work' class='bg-white text-[#0b1220] px-6 md:px-10 lg:px-16 py-16 md:py-24 overflow-hidden'>
+    <section id='work' class='bg-[#f8fafc] text-[#0b1220] px-6 md:px-10 lg:px-16 py-16 md:py-24 overflow-hidden'>
         <div class="max-w-7xl mx-auto">
             <h2 class='text-4xl md:text-5xl text-center font-bold mb-12' data-reveal>Case Studies</h2>
             <div id="case-study-slider" class="relative" data-reveal>
@@ -335,7 +341,8 @@
    const aiSteps = $('#ai-next-steps');
    let lastAISubmit = 0;
 
-   async function getAIResponse(text) {
+   // A simple heuristic-based fallback if the AI service is unavailable.
+   async function localGetAIResponse(text) {
         const t = (text || '').toLowerCase();
         const response = {
             services: [],
@@ -354,6 +361,30 @@
         return new Promise(resolve => setTimeout(() => resolve(response), 1000));
    }
 
+   // Call the Netlify serverless AI analyzer and gracefully fall back to the local heuristic
+   async function callAIAnalyzer(text) {
+     try {
+       const res = await fetch('/.netlify/functions/analyze', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({ prompt: text })
+       });
+       if (res.ok) {
+         const data = await res.json();
+         // Normalise the response in case fields are missing
+         return {
+           services: Array.isArray(data.services) ? data.services : [],
+           reason: typeof data.reason === 'string' ? data.reason : '',
+           steps: Array.isArray(data.steps) ? data.steps : []
+         };
+       }
+     } catch (err) {
+       // Suppress network errors to avoid leaking user input to the console
+     }
+     // If the request fails or returns an unexpected response, fall back to the heuristic
+     return localGetAIResponse(text);
+   }
+
    async function runAnalyzer() {
      const now = Date.now();
      if (now - lastAISubmit < 2000) {
@@ -368,10 +399,32 @@
        aiOut.classList.add('hidden');
        return;
      }
+     // Disable the button and show loader while the request is in progress
      aiBtn.disabled = true;
      aiBtn.textContent = 'Analyzing…';
-     aiStatus.textContent = 'Analyzing…';
-     const result = await getAIResponse(text);
+     aiStatus.textContent = '';
+     const aiLoader = $('#ai-loader');
+     if (aiLoader) aiLoader.classList.remove('hidden');
+
+     let result;
+     try {
+       result = await callAIAnalyzer(text);
+     } catch (err) {
+       result = null;
+     }
+
+     // Hide loader and restore button state
+     if (aiLoader) aiLoader.classList.add('hidden');
+     aiBtn.disabled = false;
+     aiBtn.textContent = 'Analyze My Problem';
+
+     if (!result) {
+       aiStatus.textContent = 'Something went wrong. Please try again later.';
+       aiOut.classList.add('hidden');
+       return;
+     }
+
+     // Populate the UI with the analysis results
      aiChips.innerHTML = '';
      (result.services || []).forEach(s => {
        const span = document.createElement('span');
@@ -388,8 +441,6 @@
      });
      aiOut.classList.remove('hidden');
      aiStatus.textContent = 'Ready';
-     aiBtn.disabled = false;
-     aiBtn.textContent = 'Analyze My Problem';
    }
 
    if (aiBtn) aiBtn.addEventListener('click', runAnalyzer);
@@ -716,14 +767,8 @@
             fetch('https://script.google.com/macros/s/AKfycbxa5ZIrbYZO5kSGZT4LJeSuzr5Qo3CjVUon5JzHrrsHibOIFD8d0BIfgkAEbxpfHbIWUw/exec', {
                 method: 'POST',
                 body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    console.error('Background form submission failed.', response);
-                }
-            })
-            .catch(error => {
-                console.error('Error during background form submission:', error);
+            }).catch(() => {
+                /* Suppress fetch errors to avoid exposing any user data in the console. */
             });
         });
     }
