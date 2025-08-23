@@ -5,6 +5,17 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>PixelPop Digital – Digital First Agency</title>
  <meta name="description" content="Ship a stunning, high-converting site—fast. PixelPop designs & builds modern websites, apps, and growth engines with clean UI, tasteful motion, and measurable ROI.">
+
+  <!-- Favicon: monitor symbol -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+ <!-- Google Tag Manager -->
+ <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+ 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+ })(window,document,'script','dataLayer','GTM-59CZQJDT');</script>
+ <!-- End Google Tag Manager -->
  
  <!-- Tailwind CSS and Google Fonts -->
  <script src="https://cdn.tailwindcss.com"></script>
@@ -70,6 +81,11 @@
 </head>
 <body class="bg-[#0b1220]">
 
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59CZQJDT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
  <!-- ===== Navbar ===== -->
  <header class='fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 lg:px-16 py-4 transition-all duration-300 text-white'>
    <a href="/" class="flex items-center gap-3">
@@ -110,8 +126,7 @@
    </section>
 
    <!-- ===== AI Problem Analyzer Section ===== -->
-   <!-- Light background to match modern design aesthetics -->
-   <section id='analyzer' class='bg-[#f8fafc] text-[#0b1220] px-6 md:px-10 lg:px-16 py-16 md:py-24'>
+   <section id='analyzer' class='bg-white text-[#0b1220] px-6 md:px-10 lg:px-16 py-16 md:py-24'>
      <div class="max-w-3xl mx-auto" data-reveal>
        <h2 class='text-4xl md:text-5xl font-bold text-center mb-4'>Discover Your Solution</h2>
        <p class='text-center text-lg max-w-2xl mx-auto mb-8'>Describe your business challenge, and our AI will suggest the best services to help you succeed.</p>
@@ -120,11 +135,7 @@
          <textarea id='ai-problem' name='problem' rows='4' maxlength='1000' required placeholder="e.g., 'My ROAS is low and I need a better digital marketing strategy.'" class='p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5A99FC]' aria-describedby='ai-help'></textarea>
          <p id='ai-help' class='text-sm text-gray-600'>Avoid sharing sensitive personal data. Max 1000 characters.</p>
          <div class='flex items-center gap-3'>
-           <!-- Submit button for triggering the analyzer -->
            <button id='ai-submit' type='button' class='bg-[#0b1220] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#131b2c] transition-colors disabled:bg-gray-400'>Analyze My Problem</button>
-           <!-- Animated spinner shown during analysis -->
-           <span id='ai-loader' class='hidden w-5 h-5 border-4 border-[#5A99FC] border-t-transparent rounded-full animate-spin' aria-hidden='true'></span>
-           <!-- Status text updated via JavaScript -->
            <span id='ai-status' class='text-sm text-gray-600' aria-live='polite'></span>
          </div>
        </form>
@@ -142,8 +153,7 @@
    </section>
 
    <!-- ===== Services Section ===== -->
-   <!-- Soft blue background reminiscent of RadicalLabs for improved UX -->
-   <section id='services' class='bg-[#f7faff] text-[#0b1220] px-6 md:px-10 lg:px-16 py-16 md:py-24'>
+   <section id='services' class='bg-[#eef4ff] text-[#0b1220] px-6 md:px-10 lg:px-16 py-16 md:py-24'>
      <div class="max-w-7xl mx-auto">
        <div class='text-center' data-reveal>
          <h2 class='text-4xl md:text-5xl font-bold mb-4'>Services</h2>
@@ -194,7 +204,7 @@
    </section>
 
    <!-- ===== Case Studies Section ===== -->
-    <section id='work' class='bg-[#f8fafc] text-[#0b1220] px-6 md:px-10 lg:px-16 py-16 md:py-24 overflow-hidden'>
+    <section id='work' class='bg-white text-[#0b1220] px-6 md:px-10 lg:px-16 py-16 md:py-24 overflow-hidden'>
         <div class="max-w-7xl mx-auto">
             <h2 class='text-4xl md:text-5xl text-center font-bold mb-12' data-reveal>Case Studies</h2>
             <div id="case-study-slider" class="relative" data-reveal>
@@ -341,8 +351,7 @@
    const aiSteps = $('#ai-next-steps');
    let lastAISubmit = 0;
 
-   // A simple heuristic-based fallback if the AI service is unavailable.
-   async function localGetAIResponse(text) {
+   async function getAIResponse(text) {
         const t = (text || '').toLowerCase();
         const response = {
             services: [],
@@ -361,30 +370,6 @@
         return new Promise(resolve => setTimeout(() => resolve(response), 1000));
    }
 
-   // Call the Netlify serverless AI analyzer and gracefully fall back to the local heuristic
-   async function callAIAnalyzer(text) {
-     try {
-       const res = await fetch('/.netlify/functions/analyze', {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify({ prompt: text })
-       });
-       if (res.ok) {
-         const data = await res.json();
-         // Normalise the response in case fields are missing
-         return {
-           services: Array.isArray(data.services) ? data.services : [],
-           reason: typeof data.reason === 'string' ? data.reason : '',
-           steps: Array.isArray(data.steps) ? data.steps : []
-         };
-       }
-     } catch (err) {
-       // Suppress network errors to avoid leaking user input to the console
-     }
-     // If the request fails or returns an unexpected response, fall back to the heuristic
-     return localGetAIResponse(text);
-   }
-
    async function runAnalyzer() {
      const now = Date.now();
      if (now - lastAISubmit < 2000) {
@@ -399,32 +384,10 @@
        aiOut.classList.add('hidden');
        return;
      }
-     // Disable the button and show loader while the request is in progress
      aiBtn.disabled = true;
      aiBtn.textContent = 'Analyzing…';
-     aiStatus.textContent = '';
-     const aiLoader = $('#ai-loader');
-     if (aiLoader) aiLoader.classList.remove('hidden');
-
-     let result;
-     try {
-       result = await callAIAnalyzer(text);
-     } catch (err) {
-       result = null;
-     }
-
-     // Hide loader and restore button state
-     if (aiLoader) aiLoader.classList.add('hidden');
-     aiBtn.disabled = false;
-     aiBtn.textContent = 'Analyze My Problem';
-
-     if (!result) {
-       aiStatus.textContent = 'Something went wrong. Please try again later.';
-       aiOut.classList.add('hidden');
-       return;
-     }
-
-     // Populate the UI with the analysis results
+     aiStatus.textContent = 'Analyzing…';
+     const result = await getAIResponse(text);
      aiChips.innerHTML = '';
      (result.services || []).forEach(s => {
        const span = document.createElement('span');
@@ -441,6 +404,8 @@
      });
      aiOut.classList.remove('hidden');
      aiStatus.textContent = 'Ready';
+     aiBtn.disabled = false;
+     aiBtn.textContent = 'Analyze My Problem';
    }
 
    if (aiBtn) aiBtn.addEventListener('click', runAnalyzer);
@@ -767,8 +732,14 @@
             fetch('https://script.google.com/macros/s/AKfycbxa5ZIrbYZO5kSGZT4LJeSuzr5Qo3CjVUon5JzHrrsHibOIFD8d0BIfgkAEbxpfHbIWUw/exec', {
                 method: 'POST',
                 body: formData
-            }).catch(() => {
-                /* Suppress fetch errors to avoid exposing any user data in the console. */
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Background form submission failed.', response);
+                }
+            })
+            .catch(error => {
+                console.error('Error during background form submission:', error);
             });
         });
     }
