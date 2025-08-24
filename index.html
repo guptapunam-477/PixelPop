@@ -352,22 +352,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    let lastAISubmit = 0;
 
    async function getAIResponse(text) {
-        const t = (text || '').toLowerCase();
-        const response = {
-            services: [],
-            reason: "Based on your input, we've identified key areas where we can provide significant value. Our approach will be tailored to your specific goals.",
-            steps: [
-                "Book a free discovery call to discuss your project.",
-                "We'll provide a detailed proposal and timeline.",
-                "Let's start building your success story together."
-            ]
-        };
-        if (t.includes('design') || t.includes('ux') || t.includes('ui')) { response.services.push({ label: 'Website Design' }); }
-        if (t.includes('develop') || t.includes('app') || t.includes('website') || t.includes('code')) { response.services.push({ label: 'Website & Web App Development' });}
-        if (t.includes('mobile') || t.includes('ios') || t.includes('android')) { response.services.push({ label: 'Mobile App Development' }); }
-        if (t.includes('marketing') || t.includes('seo') || t.includes('ads') || t.includes('roas')) { response.services.push({ label: 'Digital & Performance Marketing' });}
-        if (response.services.length === 0) { response.services.push({ label: 'Website & Web App Development' }); }
-        return new Promise(resolve => setTimeout(() => resolve(response), 1000));
+     const query = (text || '').slice(0, 1000).trim();
+     if (!query) return { services: [], reason: '', steps: [] };
+
+     try {
+       // Build the absolute endpoint so that deployments under subdirectories work
+       const endpoint = `${window.location.origin}/.netlify/functions/analyze`;
+       const res = await fetch(endpoint, {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({ prompt: query })
+       });
+       if (res.ok) {
+         const data = await res.json();
+         if (data && Array.isArray(data.services)) {
+           return data;
+         }
+       }
+     } catch (err) {
+       // Silent catch – fall through to heuristics
+     }
+
+     // Heuristic fallback mirroring server-side logic
+     const t = query.toLowerCase();
+     const buckets = new Set();
+     const has = (...k) => k.some(w => t.includes(w));
+     if (has('roas','ads','cpc','cac','retarget','facebook','google ads','meta ads')) buckets.add('Digital & Performance Marketing');
+     if (has('slow','lcp','cls','web vitals','core web','performance','speed','develop','code','website')) buckets.add('Website & Web App Development');
+     if (has('app','android','ios','play store','app store','mobile')) buckets.add('Mobile App Development');
+     if (has('brand','ui','ux','landing','redesign','conversion','cvr','design')) buckets.add('Website Design');
+     if (has('seo','organic','sitemap','crawl','index','schema')) { buckets.add('Website & Web App Development'); buckets.add('Digital & Performance Marketing'); }
+     const services = Array.from(buckets).map(label => ({ label }));
+     if (!services.length) services.push({ label:'Website Design' });
+     return {
+       services,
+       reason:'Suggested by heuristic analyzer.',
+       steps:['Clarify target audience.','Book a strategy call.','Scope discovery & timeline.']
+     };
    }
 
    async function runAnalyzer() {
