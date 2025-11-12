@@ -1,4 +1,3 @@
-
 import React, {useRef} from 'react';
 import { useOnScreen } from '../hooks/useOnScreen';
 
@@ -7,17 +6,17 @@ const ServiceCard: React.FC<{icon: React.ReactNode, title: string, items: string
     const isVisible = useOnScreen(ref, 0.2);
 
     return (
-    <div ref={ref} className={`glass-card rounded-3xl p-6 md:p-8 reveal ${isVisible ? 'active' : ''}`}>
+    <div ref={ref} className={`service-card rounded-3xl p-6 md:p-8 h-full flex flex-col reveal ${isVisible ? 'active' : ''}`}>
         <div className="mb-6">
-            <div className="glass-strong rounded-2xl p-4 w-16 h-16 flex items-center justify-center transition-transform duration-300 hover:scale-110">
+            <div className="glass rounded-2xl p-4 w-16 h-16 flex items-center justify-center transition-transform duration-300 hover:scale-110 shadow-lg">
                 {icon}
             </div>
         </div>
         <h3 className='text-xl md:text-2xl font-bold mb-4 text-[#1a202c]'>{title}</h3>
-        <ul className='space-y-2 md:space-y-3 text-sm md:text-base text-gray-700'>
+        <ul className='space-y-3 text-base text-gray-700 flex-grow'>
             {items.map((item, i) => (
             <li key={i} className="flex items-start">
-                <span className="text-[#3CC61A] mr-2 md:mr-3 mt-1 text-lg md:text-xl">✓</span>
+                <svg className="w-6 h-6 text-[#3CC61A] mr-3 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>{item}</span>
             </li>
             ))}

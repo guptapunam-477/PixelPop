@@ -1,9 +1,10 @@
-
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useOnScreen } from '../hooks/useOnScreen';
 import {
-  LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Sector
+  LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
+// FIX: Import the CaseStudy type to ensure type consistency.
+import CaseStudyModal, { CaseStudy } from './CaseStudyModal';
 
 // Data for charts
 const hicomData = [
@@ -17,19 +18,112 @@ const footwearData = [
 ];
 const COLORS = ['#3CC61A', '#5A99FC'];
 
+// FIX: Explicitly type the caseStudies array to match the CaseStudy type definition.
+const caseStudies: CaseStudy[] = [
+    {
+        id: 'hicom',
+        title: "Hicom India",
+        subtitle: "Industrial Supplier - SEO & Lead Generation",
+        imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop",
+        stats: [ { value: '+148%', label: 'Organic Sessions' }, { value: '+92%', label: 'Qualified Leads' }, { value: '↑ 11.3', label: 'Avg Position' } ],
+        chart: (
+          <ResponsiveContainer>
+            <LineChart data={hicomData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)" />
+              <XAxis dataKey="name" stroke="#666" />
+              <YAxis stroke="#666" />
+              <Tooltip wrapperClassName="glass-card !border-none !p-2" />
+              <Line type="monotone" dataKey="sessions" stroke="#5A99FC" strokeWidth={2} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+            </LineChart>
+          </ResponsiveContainer>
+        ),
+        description: "A complete SEO overhaul, including in-depth technical optimization, a comprehensive content strategy, and a revamped lead flow, culminated in significant organic growth and improved lead quality. We focused on high-intent keywords and built topical authority to dominate search rankings.",
+        link: "https://www.hicomindia.com/", linkText: "View Case Study",
+        imageFirst: true,
+        actionType: 'modal'
+    },
+    {
+        id: 'btclub',
+        title: "TheBTclub",
+        subtitle: "D2C Apparel - Performance Marketing",
+        imageUrl: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1200&auto=format&fit=crop",
+        stats: [{ value: '3x', label: 'Sales Growth' }, { value: '4.5x', label: 'ROAS' }, { value: '-5%', label: 'RTO Rate' }],
+        chart: (
+          <ResponsiveContainer>
+            <BarChart data={btclubData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)"/>
+              <XAxis dataKey="name" stroke="#666" />
+              <YAxis stroke="#666" />
+              <Tooltip wrapperClassName="glass-card !border-none !p-2" />
+              <Bar dataKey="Before" fill="#5A99FC" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="After" fill="#3CC61A" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        ),
+        description: "Through meticulous account restructuring, implementing a rapid creative testing flywheel, and optimizing the entire sales funnel, we achieved marked improvements in advertising efficiency and overall profitability for this D2C brand.",
+        link: "https://calendly.com/pixel-pop-digital", linkText: "Start Similar Project",
+        imageFirst: false,
+        actionType: 'link'
+    },
+    {
+        id: 'hikalpaa',
+        title: "HiKalpaa",
+        subtitle: "Preschool - Lead Optimization",
+        imageUrl: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1200&auto=format&fit=crop",
+        stats: [{ value: '100%', label: 'Target Met' }, { value: '3x', label: 'Footfall' }, { value: '+78%', label: 'Lead Quality' }],
+        chart: (
+          <ResponsiveContainer>
+            <PieChart>
+              <Pie data={hikalpaaData} cx="50%" cy="50%" innerRadius={40} outerRadius={60} fill="#8884d8" dataKey="value" paddingAngle={5}>
+                {hikalpaaData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+              </Pie>
+              <Tooltip wrapperClassName="glass-card !border-none !p-2" />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
+        ),
+        description: "We implemented an automated lead qualification flow using WhatsApp and developed highly targeted local campaigns. By enhancing the user journey from ad click to school visit, we successfully helped HiKalpaa achieve 100% of their yearly admissions target.",
+        link: "https://www.hikalpaa.org/", linkText: "View Website",
+        imageFirst: true,
+        actionType: 'modal'
+    },
+    {
+        id: 'footwear',
+        title: "D2C Footwear Brand",
+        subtitle: "E-commerce - Paid Media Optimization",
+        imageUrl: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=1200&auto=format&fit=crop",
+        stats: [{ value: '4.5x', label: 'ROAS' }, { value: '+2.5%', label: 'CVR' }, { value: '+25%', label: 'AOV' }],
+        chart: (
+          <ResponsiveContainer>
+              <LineChart data={footwearData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)" />
+                  <XAxis dataKey="name" stroke="#666" />
+                  <YAxis stroke="#666" />
+                  <Tooltip wrapperClassName="glass-card !border-none !p-2" />
+                  <Line type="monotone" dataKey="roas" stroke="#3CC61A" strokeWidth={2} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+              </LineChart>
+          </ResponsiveContainer>
+        ),
+        description: "Our team optimized the paid media strategy across multiple platforms, conducted rigorous landing page A/B testing, and introduced product bundling offers. These efforts resulted in a significant improvement in Return On Ad Spend (ROAS) and other key e-commerce metrics.",
+        link: "https://calendly.com/pixel-pop-digital", linkText: "Get Similar Results",
+        imageFirst: false,
+        actionType: 'link'
+    }
+];
+
 const CaseStudyCard: React.FC<{
-    title: string;
-    subtitle: string;
-    imageUrl: string;
-    stats: { value: string; label: string }[];
-    chart: React.ReactNode;
-    description: string;
-    link: string;
-    linkText: string;
-    imageFirst?: boolean;
-}> = ({ title, subtitle, imageUrl, stats, chart, description, link, linkText, imageFirst = false }) => {
+    caseStudy: CaseStudy;
+    onOpenModal: (caseData: CaseStudy) => void;
+}> = ({ caseStudy, onOpenModal }) => {
     const ref = useRef<HTMLDivElement>(null);
     const isVisible = useOnScreen(ref, 0.2);
+    const { title, subtitle, imageUrl, stats, chart, description, link, linkText, imageFirst, actionType } = caseStudy;
+
+    const handleAction = () => {
+        if (actionType === 'modal') {
+            onOpenModal(caseStudy);
+        }
+    };
 
     const imageSection = (
         <div className='relative h-64 lg:h-full min-h-[250px]'>
@@ -53,10 +147,16 @@ const CaseStudyCard: React.FC<{
                 ))}
             </div>
             <div className='relative w-full h-40 mb-4'>{chart}</div>
-            <p className='text-sm text-gray-700 mb-3 leading-relaxed'>{description}</p>
-            <a href={link} target='_blank' rel='noopener noreferrer' className='inline-block text-[#5A99FC] font-semibold hover:underline text-base focus:outline-none focus:ring-2 focus:ring-[#5A99FC] focus:ring-offset-2 rounded px-1 py-1'>
-                {linkText} →
-            </a>
+            <p className='text-sm text-gray-700 mb-3 leading-relaxed'>{description.substring(0, 120)}...</p>
+            {actionType === 'modal' ? (
+                 <button onClick={handleAction} className='inline-block text-[#5A99FC] font-semibold hover:underline text-base focus:outline-none focus:ring-2 focus:ring-[#5A99FC] focus:ring-offset-2 rounded px-1 py-1'>
+                    {linkText} →
+                </button>
+            ) : (
+                <a href={link} target='_blank' rel='noopener noreferrer' className='inline-block text-[#5A99FC] font-semibold hover:underline text-base focus:outline-none focus:ring-2 focus:ring-[#5A99FC] focus:ring-offset-2 rounded px-1 py-1'>
+                    {linkText} →
+                </a>
+            )}
         </div>
     );
 
@@ -73,6 +173,15 @@ const CaseStudyCard: React.FC<{
 const Portfolio: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isVisible = useOnScreen(ref);
+  const [selectedCase, setSelectedCase] = useState<CaseStudy | null>(null);
+
+  const openModal = (caseData: CaseStudy) => {
+    setSelectedCase(caseData);
+  };
+
+  const closeModal = () => {
+    setSelectedCase(null);
+  };
 
   return (
     <section id='portfolio' className='relative py-12 sm:py-16 md:py-20'>
@@ -85,93 +194,13 @@ const Portfolio: React.FC = () => {
             Showcasing our best projects that drive real results
           </p>
         </div>
-
-        <CaseStudyCard
-          title="Hicom India"
-          subtitle="Industrial Supplier - SEO & Lead Generation"
-          imageUrl="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop"
-          stats={[ { value: '+148%', label: 'Organic Sessions' }, { value: '+92%', label: 'Qualified Leads' }, { value: '↑ 11.3', label: 'Avg Position' }]}
-          chart={
-            <ResponsiveContainer>
-              <LineChart data={hicomData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)" />
-                <XAxis dataKey="name" stroke="#666" />
-                <YAxis stroke="#666" />
-                <Tooltip wrapperClassName="glass-card !border-none !p-2" />
-                <Line type="monotone" dataKey="sessions" stroke="#5A99FC" strokeWidth={2} dot={{ r: 4 }} activeDot={{ r: 6 }} />
-              </LineChart>
-            </ResponsiveContainer>
-          }
-          description="Complete SEO overhaul with technical optimization, content strategy, and lead flow revamp resulting in significant organic growth."
-          link="https://www.hicomindia.com/" linkText="View Case Study"
-          imageFirst={true}
-        />
         
-        <CaseStudyCard
-          title="TheBTclub"
-          subtitle="D2C Apparel - Performance Marketing"
-          imageUrl="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1200&auto=format&fit=crop"
-          stats={[{ value: '3x', label: 'Sales Growth' }, { value: '4.5x', label: 'ROAS' }, { value: '-5%', label: 'RTO Rate' }]}
-          chart={
-            <ResponsiveContainer>
-              <BarChart data={btclubData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)"/>
-                <XAxis dataKey="name" stroke="#666" />
-                <YAxis stroke="#666" />
-                <Tooltip wrapperClassName="glass-card !border-none !p-2" />
-                <Bar dataKey="Before" fill="#5A99FC" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="After" fill="#3CC61A" radius={[4, 4, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          }
-          description="Account restructuring, creative testing flywheel, and funnel optimization leading to marked efficiency and profitability gains."
-          link="#contact" linkText="Start Similar Project"
-          imageFirst={false}
-        />
-
-        <CaseStudyCard
-          title="HiKalpaa"
-          subtitle="Preschool - Lead Optimization"
-          imageUrl="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1200&auto=format&fit=crop"
-          stats={[{ value: '100%', label: 'Target Met' }, { value: '3x', label: 'Footfall' }, { value: '+78%', label: 'Lead Quality' }]}
-          chart={
-            <ResponsiveContainer>
-              <PieChart>
-                <Pie data={hikalpaaData} cx="50%" cy="50%" innerRadius={40} outerRadius={60} fill="#8884d8" dataKey="value" paddingAngle={5}>
-                  {hikalpaaData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
-                </Pie>
-                <Tooltip wrapperClassName="glass-card !border-none !p-2" />
-                <Legend />
-              </PieChart>
-            </ResponsiveContainer>
-          }
-          description="Automated lead qualification flow, targeted campaigns, and enhanced user journey helping achieve 100% admissions target."
-          link="https://www.hikalpaa.org/" linkText="View Website"
-          imageFirst={true}
-        />
-
-        <CaseStudyCard
-          title="D2C Footwear Brand"
-          subtitle="E-commerce - Paid Media Optimization"
-          imageUrl="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=1200&auto=format&fit=crop"
-          stats={[{ value: '4.5x', label: 'ROAS' }, { value: '+2.5%', label: 'CVR' }, { value: '+25%', label: 'AOV' }]}
-          chart={
-            <ResponsiveContainer>
-                <LineChart data={footwearData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)" />
-                    <XAxis dataKey="name" stroke="#666" />
-                    <YAxis stroke="#666" />
-                    <Tooltip wrapperClassName="glass-card !border-none !p-2" />
-                    <Line type="monotone" dataKey="roas" stroke="#3CC61A" strokeWidth={2} dot={{ r: 4 }} activeDot={{ r: 6 }} />
-                </LineChart>
-            </ResponsiveContainer>
-          }
-          description="Paid media strategy optimization, landing page A/B testing, and product bundling resulting in significant ROAS improvement."
-          link="#contact"
-          linkText="Get Similar Results"
-          imageFirst={false}
-        />
+        {caseStudies.map((cs) => (
+            <CaseStudyCard key={cs.id} caseStudy={cs} onOpenModal={openModal} />
+        ))}
       </div>
+
+      {selectedCase && <CaseStudyModal caseData={selectedCase} onClose={closeModal} />}
     </section>
   );
 };

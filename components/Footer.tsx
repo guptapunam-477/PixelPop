@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Footer: React.FC = () => {
@@ -10,6 +9,7 @@ const Footer: React.FC = () => {
              <h3 className="font-bold text-xl mb-4 gradient-text">PixelPop Digi</h3>
              <p className="text-base text-gray-600">Bengaluru, Karnataka, India</p>
              <p className="text-base text-gray-600 mt-2">Transforming digital experiences since 2020</p>
+             <p className="text-base text-gray-600 mt-4 italic">Helping Small Businesses Go Online</p>
            </div>
            <div>
                <h3 className="font-bold text-lg mb-4">Get in Touch</h3>
