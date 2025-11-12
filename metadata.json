@@ -1,0 +1,5 @@
+{
+  "name": "PixelPop Digi Website",
+  "description": "A React-based replica and enhancement of the PixelPop Digi agency website, featuring smooth animations, a functional mobile menu, and a seamless single-page scrolling experience.",
+  "requestFramePermissions": []
+}
