@@ -1,6 +1,5 @@
 import React from 'react';
 import Hero from '../components/Hero';
-import TrustStrip from '../components/TrustStrip';
 import ServicesOverview from '../components/ServicesOverview';
 import Differentiation from '../components/Differentiation';
 import CaseStudiesPreview from '../components/CaseStudiesPreview';
@@ -13,7 +12,6 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Hero />
-      <TrustStrip />
       <ServicesOverview />
       <Differentiation />
       <CaseStudiesPreview />

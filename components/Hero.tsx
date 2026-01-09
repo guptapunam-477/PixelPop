@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   return (
-    <section id="hero" className='relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-10 lg:px-16 overflow-hidden'>
+    <section
+      id="hero"
+      className='relative min-h-[80vh] flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-10 lg:px-16 pt-28 md:pt-32 overflow-hidden'
+    >
       <div className='relative max-w-5xl mx-auto z-10 glass-card rounded-3xl p-6 sm:p-8 md:p-12'>
-        <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 md:mb-6 leading-tight smooth-bounce-in'>
-          We Build & Scale <span className="gradient-text">High-Conversion Shopify Brands</span>
+        <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 leading-tight smooth-bounce-in'>
+          Build & Scale High-Conversion <span className="gradient-text">Shopify Brands</span>
         </h1>
-        <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 max-w-3xl mx-auto mb-8 md:mb-10 leading-relaxed smooth-bounce-in delay-1'>
+        <p className='text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-8 md:mb-10 leading-relaxed smooth-bounce-in delay-1'>
           PixelPop Digi is a D2C-focused ecommerce agency helping brands design, launch, and grow profitable Shopify stores through performance marketing, conversion-driven UX, and scalable technology.
         </p>
         
