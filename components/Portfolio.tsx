@@ -184,7 +184,7 @@ const Portfolio: React.FC = () => {
   };
 
   return (
-    <section id='portfolio' className='relative py-12 sm:py-16 md:py-20'>
+    <section className='relative py-12 sm:py-16 md:py-20'>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div ref={ref} className={`text-center mb-10 md:mb-12 reveal ${isVisible ? 'active' : ''}`}>
           <h2 className='text-4xl sm:text-5xl md:text-6xl font-black mb-3'>

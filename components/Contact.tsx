@@ -7,7 +7,7 @@ const Contact: React.FC = () => {
     const isVisible = useOnScreen(ref);
     
     const [formData, setFormData] = useState({
-        Name: '', Email: '', 'Company Name': '', 'Phone Number': '', 'Services Required': '', Message: ''
+        Timestamp: '', Name: '', 'Company Name': '', Email: '', 'Phone Number': '', 'Services Required': ''
     });
     const [status, setStatus] = useState<{type: 'success' | 'error' | '', message: string}>({type: '', message: ''});
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,8 +27,11 @@ const Contact: React.FC = () => {
         setStatus({ type: '', message: ''});
 
         const formPayload = new FormData();
+        formPayload.append('Timestamp', new Date().toISOString());
         Object.entries(formData).forEach(([key, value]) => {
-            formPayload.append(key, value);
+            if (key !== 'Timestamp') {
+                formPayload.append(key, value);
+            }
         });
 
         fetch('https://script.google.com/macros/s/AKfycbxa5ZIrbYZO5kSGZT4LJeSuzr5Qo3CjVUon5JzHrrsHibOIFD8d0BIfgkAEbxpfHbIWUw/exec', {
@@ -37,8 +40,8 @@ const Contact: React.FC = () => {
         })
         .then(response => {
             if (response.ok) {
-                setStatus({ type: 'success', message: "Thank you! Your message has been sent. We'll get back to you soon."});
-                setFormData({ Name: '', Email: '', 'Company Name': '', 'Phone Number': '', 'Services Required': '', Message: '' });
+                setStatus({ type: 'success', message: "Thank you! Your inquiry has been submitted. We'll get back to you within 1-2 business days."});
+                setFormData({ Timestamp: '', Name: '', 'Company Name': '', Email: '', 'Phone Number': '', 'Services Required': '' });
             } else {
                 throw new Error('Network response was not ok.');
             }
@@ -57,10 +60,10 @@ const Contact: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div ref={ref} className={`text-center mb-12 md:mb-16 reveal ${isVisible ? 'active' : ''}`}>
           <h2 className='text-4xl sm:text-5xl md:text-6xl font-black mb-4'>
-            Let's <span className="gradient-text">Connect</span>
+            Let's Talk About Your <span className="gradient-text">D2C Growth</span>
           </h2>
           <p className='text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto'>
-            Ready to transform your digital presence? Get in touch and let's create something amazing together.
+            Tell us about your business, goals, and challenges. We'll respond with clarity on how we can help — or honestly tell you if we're not the right fit.
           </p>
         </div>
         <div className={`glass-card rounded-3xl p-8 md:p-12 reveal ${isVisible ? 'active' : ''}`}>
@@ -76,27 +79,31 @@ const Contact: React.FC = () => {
               </div>
             </div>
             <div>
-              <label htmlFor='services-required' className='block text-sm font-semibold mb-2 text-gray-700'>Service Needed</label>
+              <label htmlFor='services-required' className='block text-sm font-semibold mb-2 text-gray-700'>Services Required</label>
               <select id='services-required' name='Services Required' required className='form-input w-full' value={formData['Services Required']} onChange={handleInputChange}>
                  <option value="" disabled>Select a service...</option>
-                 <optgroup label="Design">
-                     <option>Website Design</option> <option>Mobile App Design</option> <option>UI/UX Design & Audit</option>
-                 </optgroup>
-                 <optgroup label="Technology">
-                     <option>Web Development</option> <option>Mobile Apps Development</option> <option>Web Apps Development</option>
-                 </optgroup>
-                 <optgroup label="Digital Marketing">
-                     <option>Performance Marketing</option> <option>SEO Optimization</option> <option>Growth Strategy</option>
-                 </optgroup>
+                 <option>Shopify Development</option>
+                 <option>Growth Marketing</option>
+                 <option>UI/UX Design</option>
+                 <option>Combination</option>
              </select>
             </div>
             <div>
-              <label htmlFor='message' className='block text-sm font-semibold mb-2 text-gray-700'>Message</label>
-              <textarea id='message' name='Message' rows={5} className='form-input w-full' placeholder='Tell us about your project...' value={formData.Message} onChange={handleInputChange}></textarea>
+              <label htmlFor='company-name' className='block text-sm font-semibold mb-2 text-gray-700'>Company Name</label>
+              <input id='company-name' name='Company Name' type='text' className='form-input w-full' placeholder='Your company name' value={formData['Company Name']} onChange={handleInputChange}/>
             </div>
-            <button type='submit' className='btn-primary w-full md:w-auto md:mx-auto px-12 py-4 text-lg' disabled={isSubmitting}>
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
+            <div>
+              <label htmlFor='phone' className='block text-sm font-semibold mb-2 text-gray-700'>Phone Number</label>
+              <input id='phone' name='Phone Number' type='tel' className='form-input w-full' placeholder='Your phone number' value={formData['Phone Number']} onChange={handleInputChange} />
+            </div>
+            <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+              <button type='submit' className='btn-primary px-12 py-4 text-lg' disabled={isSubmitting}>
+                {isSubmitting ? 'Sending...' : 'Submit Inquiry'}
+              </button>
+              <a href='https://calendly.com/pixel-pop-digital' target="_blank" rel="noopener noreferrer" className='btn-secondary text-center px-12 py-4 text-lg'>
+                Book a Free Strategy Call
+              </a>
+            </div>
           </form>
           {status.message && (
             <div className={`mt-6 p-4 rounded-lg text-center ${status.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
