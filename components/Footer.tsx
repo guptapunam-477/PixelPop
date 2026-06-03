@@ -13,7 +13,7 @@ export function Footer() {
             className="flex items-center gap-2 font-display text-xl font-extrabold"
           >
             <span aria-hidden className="h-2.5 w-2.5 rounded-full bg-accent" />
-            PixelPop<span className="text-accent">.</span>Digi
+            <span>PixelPop&nbsp;Digi</span>
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-bone-50/60">
             {SITE.description}

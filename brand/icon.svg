@@ -1,0 +1,16 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="112" fill="#080808"/>
+  <!-- baseline -->
+  <line x1="96" y1="392" x2="416" y2="392" stroke="#FFFFFF" stroke-opacity="0.14"
+        stroke-width="14" stroke-linecap="round"/>
+  <!-- upward line -->
+  <polyline points="104,340 192,300 280,322 384,150" fill="none"
+            stroke="#F36F2A" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- arrowhead -->
+  <path d="M384,150 L330,158 M384,150 L376,206" stroke="#F36F2A"
+        stroke-width="32" stroke-linecap="round" fill="none"/>
+  <!-- mid data point -->
+  <circle cx="192" cy="300" r="14" fill="#080808" stroke="#F36F2A" stroke-width="14"/>
+  <!-- end dot -->
+  <circle cx="384" cy="150" r="26" fill="#C8FF5C"/>
+</svg>

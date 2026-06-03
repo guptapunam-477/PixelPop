@@ -48,7 +48,7 @@ export function Header() {
             aria-hidden
             className="inline-block h-2.5 w-2.5 rounded-full bg-accent"
           />
-          PixelPop<span className="text-accent">.</span>Digi
+          <span>PixelPop&nbsp;Digi</span>
         </Link>
 
         {/* Desktop nav */}

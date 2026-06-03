@@ -83,12 +83,26 @@ export function ContactForm() {
         }),
       });
 
-      if (!res.ok) throw new Error("Request failed");
-      // URL changes on success -> dedicated thank-you route.
-      router.push("/thank-you");
+      if (res.ok) {
+        // URL changes on success -> dedicated thank-you route.
+        router.push("/thank-you");
+        return;
+      }
+
+      // Surface the server's specific message so failures are diagnosable.
+      let message =
+        "Something went wrong sending your request. Please try again, or email us directly.";
+      try {
+        const data = await res.json();
+        if (data?.error) message = data.error;
+      } catch {
+        /* response had no JSON body */
+      }
+      setErrors({ form: message });
+      setSubmitting(false);
     } catch {
       setErrors({
-        form: "Something went wrong sending your request. Please try again, or email us directly.",
+        form: "We couldn't reach the server. Please check your connection and try again, or email us directly.",
       });
       setSubmitting(false);
     }

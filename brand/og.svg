@@ -1,0 +1,62 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F36F2A" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#F36F2A" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="warm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1208" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#080808" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="630" fill="#080808"/>
+  <rect x="640" y="0" width="560" height="630" fill="url(#warm)"/>
+
+  <!-- subtle grid -->
+  <g stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="1">
+    <line x1="0" y1="105" x2="1200" y2="105"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="525" x2="1200" y2="525"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- upward line chart -->
+  <path d="M120,470 L300,430 L470,440 L640,360 L810,300 L980,200 L1080,120 L1080,540 L120,540 Z"
+        fill="url(#area)"/>
+  <polyline points="120,470 300,430 470,440 640,360 810,300 980,200 1080,120"
+            fill="none" stroke="#F36F2A" stroke-width="6"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1080,120 L1044,128 M1080,120 L1072,156" stroke="#F36F2A"
+        stroke-width="6" stroke-linecap="round" fill="none"/>
+  <circle cx="300" cy="430" r="6" fill="#080808" stroke="#F36F2A" stroke-width="4"/>
+  <circle cx="640" cy="360" r="6" fill="#080808" stroke="#F36F2A" stroke-width="4"/>
+  <circle cx="980" cy="200" r="6" fill="#080808" stroke="#F36F2A" stroke-width="4"/>
+  <circle cx="1080" cy="120" r="9" fill="#C8FF5C"/>
+
+  <!-- brand dot + eyebrow -->
+  <circle cx="92" cy="150" r="8" fill="#F36F2A"/>
+  <text x="112" y="157" font-family="DejaVu Sans" font-size="16"
+        letter-spacing="1.5" fill="#C8FF5C" font-weight="bold">GROWTH PARTNER FOR E-COMMERCE &amp; DTC BRANDS</text>
+
+  <!-- wordmark -->
+  <text x="88" y="300" font-family="DejaVu Sans" font-size="92"
+        fill="#F5F5F5" font-weight="bold">PixelPop Digi</text>
+
+  <!-- tagline -->
+  <text x="92" y="372" font-family="DejaVu Sans" font-size="33"
+        fill="#FFFFFF" fill-opacity="0.66">Fix the growth leaks between your website,</text>
+  <text x="92" y="418" font-family="DejaVu Sans" font-size="33"
+        fill="#FFFFFF" fill-opacity="0.66">ads, SEO and revenue.</text>
+
+  <!-- services line -->
+  <text x="92" y="545" font-family="DejaVu Sans" font-size="23"
+        fill="#FFFFFF" fill-opacity="0.45" font-weight="bold">SEO  ·  Website Development  ·  Performance Marketing</text>
+</svg>
