@@ -101,15 +101,25 @@ export async function POST(req: Request) {
   }
 
   // Forward as form-encoded so Apps Script can read e.parameter.* easily.
-  const params = new URLSearchParams({
-    name,
-    company,
-    email,
-    phone,
-    services: services.join(", "),
-    source: "pixelpopdigi.com/contact",
-    submittedAt: new Date().toISOString(),
-  });
+  // We send BOTH the sheet's column-header names ("Name", "Company Name", ...)
+  // and lowercase aliases, so the script maps fields correctly regardless of
+  // which key naming its doPost expects. Extra params are harmless.
+  const servicesStr = services.join(", ");
+  const params = new URLSearchParams();
+  // Keys that match the Google Sheet header row:
+  params.set("Name", name);
+  params.set("Company Name", company);
+  params.set("Email", email);
+  params.set("Phone Number", phone);
+  params.set("Services Required", servicesStr);
+  // Lowercase aliases (ignored if the script doesn't use them):
+  params.set("name", name);
+  params.set("company", company);
+  params.set("email", email);
+  params.set("phone", phone);
+  params.set("services", servicesStr);
+  params.set("source", "pixelpopdigi.com/contact");
+  params.set("submittedAt", new Date().toISOString());
   if (process.env.CONTACT_WEBHOOK_TOKEN) {
     params.set("token", process.env.CONTACT_WEBHOOK_TOKEN);
   }
