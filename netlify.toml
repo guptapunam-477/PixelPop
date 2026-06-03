@@ -5,11 +5,17 @@
 # Set these in the Netlify UI (Site settings → Environment variables) — NOT here:
 #   CONTACT_WEBHOOK_URL     (required)  your Google Apps Script Web App /exec URL
 #   CONTACT_WEBHOOK_TOKEN   (optional)  shared secret validated in Apps Script
-#   NEXT_PUBLIC_SITE_URL    (required)  e.g. https://www.pixelpopdigi.com
+#   NEXT_PUBLIC_SITE_URL    (required)  the public site URL
 
 [build]
   command = "npm run build"
   publish = ".next"
+
+[build.environment]
+  # NEXT_PUBLIC_* variables are PUBLIC by design — Next.js inlines them into the
+  # client bundle, so their value legitimately appears in build output. Tell
+  # Netlify's secret scanner not to treat this (public) key as a secret.
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SITE_URL"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
