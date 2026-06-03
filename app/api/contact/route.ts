@@ -145,9 +145,56 @@ export async function POST(req: Request) {
   }
 }
 
-export function GET() {
-  return NextResponse.json(
-    { ok: false, error: "Method not allowed" },
-    { status: 405 }
-  );
+// Safe health check — visit /api/contact in a browser to diagnose config.
+// Reveals NO secret: only whether the var is set, its host, and reachability.
+export async function GET() {
+  const webhook = process.env.CONTACT_WEBHOOK_URL;
+  const result: Record<string, unknown> = {
+    route: "ok",
+    contactWebhookConfigured: Boolean(webhook),
+    tokenConfigured: Boolean(process.env.CONTACT_WEBHOOK_TOKEN),
+  };
+
+  if (!webhook) {
+    result.diagnosis =
+      "CONTACT_WEBHOOK_URL is NOT set on this deployment. Check the variable name/scope in Netlify and redeploy.";
+    return NextResponse.json(result, { status: 200 });
+  }
+
+  try {
+    const u = new URL(webhook);
+    result.webhookHost = u.host; // e.g. "script.google.com" — no secret path
+    result.looksLikeAppsScript = u.host.endsWith("script.google.com");
+    result.endsWithExec = u.pathname.endsWith("/exec");
+  } catch {
+    result.webhookHost = "INVALID_URL";
+    result.diagnosis = "The value set is not a valid URL (stray quotes/spaces?).";
+    return NextResponse.json(result, { status: 200 });
+  }
+
+  // Probe reachability (GET, no real form data) so we can see the upstream status.
+  try {
+    const controller = new AbortController();
+    const t = setTimeout(() => controller.abort(), 8000);
+    const ping = await fetch(webhook, {
+      method: "GET",
+      redirect: "follow",
+      signal: controller.signal,
+    });
+    clearTimeout(t);
+    result.upstreamReachable = true;
+    result.upstreamStatus = ping.status;
+    result.upstreamContentType = ping.headers.get("content-type") || "";
+    if (ping.status >= 400) {
+      result.diagnosis =
+        "Reached the Apps Script but it returned an error status. In Apps Script: Deploy → Manage deployments → Edit → Execute as 'Me', Who has access 'Anyone', then redeploy.";
+    }
+  } catch (e) {
+    result.upstreamReachable = false;
+    result.upstreamError = (e as Error).name;
+    result.diagnosis =
+      "The function could not reach the webhook URL (network/timeout). Verify the /exec URL is correct and the deployment is active.";
+  }
+
+  return NextResponse.json(result, { status: 200 });
 }
