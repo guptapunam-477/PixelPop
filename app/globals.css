@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Sora", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bone-100 text-ink-900 font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+
+  /* Visible, accessible focus state everywhere */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-bone-100;
+  }
+
+  .on-dark :focus-visible,
+  .on-dark:focus-visible {
+    @apply ring-offset-ink-900;
+  }
+
+  ::selection {
+    background: #F36F2A;
+    color: #fff;
+  }
+}
+
+@layer components {
+  .container-edge {
+    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-20 md:py-28;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em];
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold leading-none transition-all duration-200 focus-visible:outline-none;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-soft hover:-translate-y-0.5 active:translate-y-0 shadow-[0_8px_24px_-8px_rgba(243,111,42,0.6)];
+  }
+  .btn-ghost-dark {
+    @apply btn border border-white/20 text-bone-50 hover:border-white/50 hover:bg-white/5;
+  }
+  .btn-ghost-light {
+    @apply btn border border-ink-900/15 text-ink-900 hover:border-ink-900/40 hover:bg-ink-900/[0.03];
+  }
+
+  .link-underline {
+    @apply relative inline-flex items-center gap-1.5 font-medium after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100;
+  }
+
+  /* Cards */
+  .card-light {
+    @apply rounded-2xl border border-ink-900/[0.08] bg-bone-50 shadow-card;
+  }
+  .card-dark {
+    @apply rounded-2xl border border-white/10 bg-ink-800 shadow-card-dark;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

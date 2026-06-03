@@ -1,0 +1,15 @@
+# Netlify configuration for the PixelPop Digi Next.js site.
+# The Next.js runtime turns the /api/contact route into a serverless function,
+# so CONTACT_WEBHOOK_URL stays server-side and is never shipped to the browser.
+#
+# Set these in the Netlify UI (Site settings → Environment variables) — NOT here:
+#   CONTACT_WEBHOOK_URL     (required)  your Google Apps Script Web App /exec URL
+#   CONTACT_WEBHOOK_TOKEN   (optional)  shared secret validated in Apps Script
+#   NEXT_PUBLIC_SITE_URL    (required)  e.g. https://www.pixelpopdigi.com
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
