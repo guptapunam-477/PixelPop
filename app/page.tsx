@@ -9,6 +9,7 @@ import {
   WHY_US,
 } from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
+import { CountUp } from "@/components/CountUp";
 import { CtaBand } from "@/components/CtaBand";
 import {
   Alert,
@@ -87,7 +88,7 @@ export default function HomePage() {
               ].map((s) => (
                 <div key={s.l} className="bg-ink-900 px-6 py-7">
                   <dt className="font-display text-3xl font-bold text-bone-50 md:text-4xl">
-                    {s.v}
+                    <CountUp value={s.v} />
                   </dt>
                   <dd className="mt-1 text-sm text-bone-50/55">{s.l}</dd>
                 </div>
@@ -238,7 +239,7 @@ export default function HomePage() {
                     {cs.results.map((r) => (
                       <div key={r.label}>
                         <dt className="font-display text-2xl font-bold text-accent">
-                          {r.value}
+                          <CountUp value={r.value} />
                         </dt>
                         <dd className="mt-1 text-xs text-ink-900/55">
                           {r.label}
@@ -297,14 +298,25 @@ export default function HomePage() {
               actually profitable.
             </p>
           </div>
-          <ul className="mt-10 flex flex-wrap gap-3">
-            {BUSINESS_METRICS.map((m, i) => (
-              <Reveal as="li" key={m} delay={(i % 6) * 40}>
-                <span className="inline-flex items-center gap-2 rounded-full border border-ink-900/12 bg-bone-50 px-4 py-2.5 text-sm font-medium">
+        </div>
+
+        {/* Marquee: a slow, seamless horizontal strip of the real metrics.
+            Two copies so the -50% translate loops without a visible seam. */}
+        <div
+          className="group relative mt-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_6%,#000_94%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_6%,#000_94%,transparent)]"
+        >
+          <ul className="flex w-max items-center gap-3 animate-marquee group-hover:[animation-play-state:paused]">
+            {[...BUSINESS_METRICS, ...BUSINESS_METRICS].map((m, i) => (
+              <li
+                key={i}
+                aria-hidden={i >= BUSINESS_METRICS.length}
+                className="shrink-0"
+              >
+                <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-ink-900/12 bg-bone-50 px-5 py-2.5 text-sm font-medium">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                   {m}
                 </span>
-              </Reveal>
+              </li>
             ))}
           </ul>
         </div>
